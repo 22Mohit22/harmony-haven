@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Message</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="app">
+        <%- include('./header') %>
+        <div>
+            <% if (errors) { %>
+                <div class="error-container">
+                    <% errors.forEach(err => { %>
+                        <p class="error-msg"><%= err.msg %></p>
+                    <% }) %>
+                </div>
+            <% } %>
+            <form action="/new" method="post" class="newMsg-form">
+                <div class="title-container">
+                    <div class="form-con">
+                        <label for="title">Title</label>
+                        <input type="text" 
+                        name="title" 
+                        id="title" 
+                        placeholder="Title" 
+                        required
+                        value="<%= formData.title || "" %>" />
+                    </div>
+                </div>
+                <div class="msg-container">
+                    <div class="form-con">
+                        <label for="new_msg">Message</label>
+                        <textarea name="new_msg" id="new_msg" placeholder="type your message here" required ><%= formData.new_msg || "" %></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="send-msg-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

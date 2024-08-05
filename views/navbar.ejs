@@ -1,0 +1,29 @@
+<nav>
+    <ul>
+        <% if (!user || user == null) { %>
+            <li class="navlink sign-in">
+                <form action="/signin" method="get">
+                    <button type="submit" class="sign-out-btn">Sign in</button>
+                </form>
+            </li>
+        <% } %>
+        <% if (user) { %>
+            <li class="navlink sign-in">
+                <form action="/new" method="get">
+                    <button type="submit" class="sign-out-btn">Create Post</button>
+                </form>
+            </li>
+            <li class="navlink user-name"><%= user %></li>
+            <li class="navlink sign-out">
+                <form action="/signout" method="post">
+                    <button type="submit" class="sign-out-btn">Sign out</button>
+                </form>
+            </li>
+        <% } %>
+        <li class="navlink sign-up">
+            <form action="/signup" method="get">
+                <button type="submit" class="sign-out-btn">Sign up</button>
+            </form>
+        </li>
+    </ul>
+</nav>

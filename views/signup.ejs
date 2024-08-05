@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="app">
+        <%- include('./header') %>
+        <% if (errors) { %>
+            <div class="error-container">
+                <% errors.forEach(err => { %>
+                    <p class="error-msg"><%= err.msg %></p>
+                <% }) %>
+            </div>
+        <% } %>
+        <form action="/signup" method="post" class="signup-form" autocomplete="on">
+            <div class="name-container">
+                <div class="form-con">
+                    <label for="firstName">First name</label>
+                    <input type="text" 
+                    class="first-name" 
+                    name="firstName" 
+                    id="firstName" 
+                    placeholder="John" 
+                    autocomplete="given-name" 
+                    autofocus 
+                    required
+                    value="<%= formData.firstName || '' %>" />
+                </div>
+                <div class="form-con">
+                    <label for="lastName">Last name</label>
+                    <input type="text" 
+                    class="last-name" 
+                    name="lastName" 
+                    id="lastName" 
+                    placeholder="Doe" 
+                    autocomplete="family-name"
+                    value="<%= formData.lastName || '' %>" />
+                </div>
+            </div>
+            <div class="email-container">
+                <div class="form-con">
+                    <label for="emailId">Email</label>
+                    <input type="email" 
+                    name="emailId" 
+                    id="emailId" 
+                    autocomplete="email" 
+                    placeholder="johndoe@gmail.com" 
+                    required
+                    value="<%= formData.emailId || '' %>" />
+                </div>
+            </div>
+            <div class="pass-container">
+                <div class="form-con">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required
+                    value="<%= formData.password || '' %>" />
+                </div>
+                <div class="form-con">
+                    <label for="confirmPassword">Confirm password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" required
+                    value="<%= formData.confirmPassword || '' %>" />
+                </div>
+            </div>
+            <div class="btns-container">
+                <button type="submit" class="signup-btn">Sign up</button>
+                <p>Already have an account? <a href="/signin" style="font-weight: bold;">Sign in</a> now.</p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

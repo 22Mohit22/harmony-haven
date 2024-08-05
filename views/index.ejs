@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Home</title>
+</head>
+<body>
+    <div>
+        <%- include('./header') %>
+    </div>
+    <div class="msgs-container">
+        <% msgs.forEach((msg) => { %>
+            
+            <div class="msg-card" id="<%= msg.msg_id %>">
+                <div class="author-type">
+                    <h3 class="msg-author">
+                        <% if (user) { %>
+                            <%= msg.first_name %> 
+                            <%= msg.last_name %>
+                        <% } else { %>
+                            Anonymous
+                        <% } %>
+                    </h3>
+                    <h4 class="member-type">
+                        <%= msg.member_type.toUpperCase() %>
+                    </h4>
+                </div>
+                <div class="msg-content">
+                    <h4 class="msg-title"><%= msg.msg_title %></h4>
+                    <p class="msg-text"><%= msg.message %></p>
+                    <p class="msg-time"><%= handleTime(msg.created_time) %> <%= handleDate(msg.created_date) %></p>
+                    <% if (admin !== undefined && admin == true) { %>
+                        <button type="button" onclick='deleteMsg("<%= msg.msg_id %>")' class="del-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6l-1 14H6L5 6"></path>
+                                <path d="M10 11v6"></path>
+                                <path d="M14 11v6"></path>
+                                <path d="M18 6H6"></path>
+                                <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                              </svg>
+                              
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    <script>
+        async function deleteMsg(msg_id) {
+            try {
+                const response = await fetch(`/delete/${msg_id}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+                if (data.success) {
+                    return;
+                } else {
+                    console.log(data.message);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Club</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="app">
+        <%- include('./header') %>
+        <div>
+            <% if (errors) { %>
+                <div class="error-container">
+                    <% errors.forEach(err => { %>
+                        <p class="error-msg"><%= err.msg %></p>
+                    <% }) %>
+                </div>
+            <% } %>
+            <form action="/membership" method="post" class="membership-form">
+                <div class="puzzle-container">
+                    <h4>
+                        <%= ques %>
+                    </h4>
+                    <div class="form-con">
+                        <label for="answer">Answer</label>
+                        <input type="number" 
+                        name="answer" 
+                        id="answer"  
+                        placeholder="answer in minutes"
+                        required />
+                    </div>
+                </div>
+                <div class="btns-container">
+                    <button type="submit" class="submitAns-btn">Submit answer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

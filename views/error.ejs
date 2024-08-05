@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <%- include('./header') %>
+        <div class="error-con">
+            <h1>   
+            <% if (statusCode == 401) { %>
+                You are just a visitor, To become a member <a href="/membership">click here</a.>
+            <% } else if (statusCode == 403) { %>
+                You are not allowed to do that you need to <a href="/signup">sign up</a> first.
+            <% } else if (statusCode == 409) { %>
+                You are already in the members list
+            <% } else if (statusCode == 404) { %>
+                Are you lost ? <a href="/">click here</a>
+                <% } %>
+            </h1>
+        </div>
+    </div>
+</body>
+</html>
