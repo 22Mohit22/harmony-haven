@@ -1,4 +1,5 @@
-const moment = require('moment');
+const moment = require('moment-timezone');
+
 const db = require('../db/queries');
 
 async function renderIndex(req, res) {
@@ -15,8 +16,9 @@ async function renderIndex(req, res) {
     }
 
     function formatTime(msgTime) {
-        const time = moment(msgTime).calendar();
-        return time;
+        const time = moment(msgTime).tz('Asia/Kolkata');
+        const finalTime = time.calendar();
+        return finalTime;
     }
     
     const messages =  await db.getMsgsByName();
