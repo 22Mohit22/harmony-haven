@@ -49,3 +49,5 @@ app.get('*', (req, res) => {
 PORT = process.env.PORT;
 
 app.listen(PORT, console.log('Running'));
+
+module.exports = app;
