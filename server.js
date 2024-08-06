@@ -42,7 +42,13 @@ app.use('/', authRouter);
 app.use('/', msgRouter);
 app.use('/', membershipRouter);
 app.get('*', (req, res) => {
-    const username = req.user.first_name + ' ' + req.user.last_name;
+    let username;
+    if (!req.user) {
+        username = null
+        res.render('error', {user: username, statusCode: 404});
+        return;
+    }
+    username = req.user.first_name + ' ' + req.user.last_name;
     res.render('error', {user: username, statusCode: 404});
 })
 
