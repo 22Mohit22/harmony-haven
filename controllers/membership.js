@@ -34,14 +34,19 @@ async function promote(req, res) {
     }
     if (answer == 17) {
         await db.updateMembership('member', req.user.id);
-        res.redirect('/');
+        res.redirect('/alert');
     } else {
         res.render('solvePuzzle', {user: username, ques: puzzle, errors: ['wrong answer'] })
     }
-    
+}
+
+function alertUser(req, res) {
+    const username = req.user.first_name + " " + req.user.last_name;
+    res.render('alertUser', {user: username});
 }
 
 module.exports = {
     solvePuzzle,
     promote,
+    alertUser
 }

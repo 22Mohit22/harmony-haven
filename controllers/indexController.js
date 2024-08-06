@@ -1,3 +1,4 @@
+const moment = require('moment');
 const db = require('../db/queries');
 
 async function renderIndex(req, res) {
@@ -13,30 +14,13 @@ async function renderIndex(req, res) {
         adminValue = true;
     }
 
-    function formatDate(msgDate) {
-        const date = new Date(msgDate);
-        const dayDate = date.getDate();
-        const month = date.getMonth() +1;
-        const year = date.getFullYear();
-
-        const formattedMonth = month < 10 ? `0${month}` : month;
-        const formattedDayDate = dayDate < 10 ? `0${dayDate}` : dayDate;
-
-        return `${formattedDayDate}-${formattedMonth}-${year}`;
-    }
-
     function formatTime(msgTime) {
-        const hrsMinSec = msgTime.split('.')[0];
-        const timeArr = hrsMinSec.split(':');
-        timeArr.pop();
-
-        const finalTime = timeArr.join(':');
-
-        return finalTime;
+        const time = moment(msgTime).calendar();
+        return time;
     }
     
     const messages =  await db.getMsgsByName();
-    res.render('index', { user: username, msgs: messages, admin: adminValue, handleTime: formatTime, handleDate: formatDate });
+    res.render('index', { user: username, msgs: messages, admin: adminValue, handleTime: formatTime });
 }
 
 async function delMsg(req, res) {

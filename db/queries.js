@@ -27,7 +27,7 @@ async function deletePost(msg_id) {
 }
 
 async function getMsgsByName() {
-    const { rows } = await pool.query("SELECT messages.author_id, users.first_name, users.last_name, users.member_type, messages.msg_id, messages.msg_title, messages.message, messages.created_time, messages.created_date FROM users INNER JOIN messages ON users.id = messages.author_id ORDER BY created_time DESC;");
+    const { rows } = await pool.query("SELECT messages.author_id, users.first_name, users.last_name, users.member_type, messages.msg_id, messages.msg_title, messages.message, messages.created_time FROM users INNER JOIN messages ON users.id = messages.author_id ORDER BY created_time DESC;");
     return rows;
 }
 
