@@ -35,7 +35,7 @@ async function promote(req, res) {
     if (answer == 17) {
         await db.updateMembership('member', req.user.id);
         req.user.member_type = 'member';
-        res.redirect('/alert');
+        res.redirect('/');
     } else {
         res.render('solvePuzzle', {user: username, ques: puzzle, errors: ['wrong answer'] })
     }
