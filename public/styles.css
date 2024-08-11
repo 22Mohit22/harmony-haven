@@ -298,6 +298,7 @@ li{
 .msg-text{
     margin-top: 5px;
     margin-bottom: 5px;
+    text-wrap: wrap;
 }
 
 .msg-time{
