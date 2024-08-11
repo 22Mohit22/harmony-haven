@@ -48,23 +48,26 @@
             </div>
         <% }) %>
     </div>
-    <script>
-        async function deleteMsg(msg_id) {
-            try {
-                const response = await fetch(`/delete/${msg_id}`, {
-                    method: 'DELETE'
-                });
-                const data = await response.json();
-                if (data.success) {
-                    return;
-                } else {
-                    console.log(data.message);
+
+    <% if (admin !== undefined && admin == true) { %>
+        <script>
+            async function deleteMsg(msg_id) {
+                try {
+                    const response = await fetch(`/delete/${msg_id}`, {
+                        method: 'DELETE'
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        return;
+                    } else {
+                        console.log(data.message);
+                    }
+                } catch (err) {
+                    console.log(err);
                 }
-            } catch (err) {
-                console.log(err);
+                window.location.reload();
             }
-            window.location.reload();
-        }
-    </script>
+        </script>
+    <% } %>
 </body>
 </html>
